@@ -56,7 +56,7 @@ protected:
 class wxZipOutputStream : public wxFilterOutputStream
 {
 public:
-	wxZipOutputStream(wxOutputStream& stream);
+	wxZipOutputStream(wxOutputStream& stream, const char* passwd = NULL);
 	virtual ~wxZipOutputStream();
 
 	//named it CreateFile, but then got link error in MSVC???
@@ -72,6 +72,7 @@ protected:
 
 	void* hZip;
 	void* pFileFuncs;
+	const char* m_password;
 };
 
 class wxZipStream : public wxZipInputStream, wxZipOutputStream

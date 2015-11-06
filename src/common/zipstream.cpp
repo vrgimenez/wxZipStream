@@ -350,10 +350,11 @@ size_t wxZipInputStream::OnSysRead(void* buffer, size_t bufsize)
 // wxZipOutputStream
 // ----------------------------------------------------------------------------
 
-wxZipOutputStream::wxZipOutputStream(wxOutputStream& Stream) : wxFilterOutputStream(Stream)
+wxZipOutputStream::wxZipOutputStream(wxOutputStream& Stream, const char* passwd) : wxFilterOutputStream(Stream)
 {
 	pFileFuncs = new zlib_filefunc_def;
 	fill_wx_filefunc((zlib_filefunc_def*)pFileFuncs);
+	m_password = passwd;
 
 	hZip = zipOpen2((const char*) this, APPEND_STATUS_CREATEAFTER, NULL,
 					(zlib_filefunc_def*) pFileFuncs/*&wxZipModule::funcs*/);
@@ -397,16 +398,23 @@ bool wxZipOutputStream::MakeFile(wxZipFileInfo& Info, wxInt32 level)
 	zip_fileinfo info;
 	tm_zip t;
 	t.tm_hour=t.tm_mday=t.tm_min=t.tm_mon=t.tm_sec=t.tm_year=0;
-	info.external_fa=0;
-	info.internal_fa=0;
+	info.external_fa = 0;
+	info.internal_fa = 0;
 	info.tmz_date = t;
-	info.dosDate = Info.dwTime; //0 == current time
-	if (zipOpenNewFileInZip(hZip, Info.szName.mb_str(),
+	info.dosDate = Info.dwTime;		//0 == current time
+
+	if (zipOpenNewFileInZip3(hZip, Info.szName.mb_str(),
 		&info,
-		NULL,0,NULL,0  //some etc. stuff
-		, Info.szComment.mb_str()		//comment
-		, Z_DEFLATED		//compression method -> Zip
-		, level) != ZIP_OK)
+		NULL,0,NULL,0,				//some etc. stuff
+		Info.szComment.mb_str(),	//comment
+		Z_DEFLATED,					//compression method -> Zip
+		level,
+		0,							//raw
+		-MAX_WBITS,
+		DEF_MEM_LEVEL,
+		Z_DEFAULT_STRATEGY,
+		m_password,					//password
+		0) != ZIP_OK )				//crc32
 	{
 		return false;
 	}
