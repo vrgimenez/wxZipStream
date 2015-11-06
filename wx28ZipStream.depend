@@ -3419,30 +3419,41 @@
 
 1300806080 c:\wx\2.8.12\include\wx\os2\filedlg.h
 
-1096525374 c:\wx\2.8.12\include\wx\zipstream.h
+1442782893 c:\wx\2.8.12\include\wx\zipstream.h
 	"wx/defs.h"
 	"wx/stream.h"
 
-1019711208 c:\_dev\wxwidgets\wx28zipstream\src\zip\zlib.h
+1367180628 c:\_dev\wxwidgets\wx28zipstream\src\zip\zlib.h
 	"zconf.h"
 
-1055923756 c:\_dev\wxwidgets\wx28zipstream\src\zip\zconf.h
+1367175430 c:\_dev\wxwidgets\wx28zipstream\src\zip\zconf.h
 	<windows.h>
-	<windows.h>
+	<limits.h>
 	<sys/types.h>
+	<stdarg.h>
+	<stddef.h>
 	<unistd.h>
+	<unixio.h>
 
-1053346920 c:\_dev\wxwidgets\wx28zipstream\src\zip\ioapi.h
+1326754290 c:\_dev\wxwidgets\wx28zipstream\src\zip\ioapi.h
+	<stdio.h>
+	<stdlib.h>
+	"zlib.h"
+	<stdint.h>
+	"mz64conf.h"
+	"stdint.h"
 
-1062781142 c:\_dev\wxwidgets\wx28zipstream\src\zip\zip.h
+1266220702 c:\_dev\wxwidgets\wx28zipstream\src\zip\zip.h
 	"zlib.h"
 	"ioapi.h"
+	"bzlib.h"
 
-1062786286 c:\_dev\wxwidgets\wx28zipstream\src\zip\unzip.h
+1341776048 c:\_dev\wxwidgets\wx28zipstream\src\zip\unzip.h
 	"zlib.h"
 	"ioapi.h"
+	"bzlib.h"
 
-1441941534 source:c:\_dev\wxwidgets\wx28zipstream\src\common\zipstream.cpp
+1442782893 source:c:\_dev\wxwidgets\wx28zipstream\src\common\zipstream.cpp
 	"wx/wxprec.h"
 	"wx/zipstream.h"
 	"wx/utils.h"
@@ -3455,11 +3466,7 @@
 	"zip/unzip.h"
 	"wx/module.h"
 
-1053346920 source:c:\_dev\wxwidgets\wx28zipstream\src\zip\ioapi.c
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	"zlib.h"
+1327161524 source:c:\_dev\wxwidgets\wx28zipstream\src\zip\ioapi.c
 	"ioapi.h"
 
 1062736776 source:c:\_dev\wxwidgets\wx28zipstream\src\zip\ioapi_mem.c
@@ -3469,13 +3476,13 @@
 	"zlib.h"
 	"ioapi.h"
 
-1061441824 source:c:\_dev\wxwidgets\wx28zipstream\src\zip\iowin32.c
+1367175430 source:c:\_dev\wxwidgets\wx28zipstream\src\zip\iowin32.c
 	<stdlib.h>
 	"zlib.h"
 	"ioapi.h"
 	"iowin32.h"
 
-1061441484 c:\_dev\wxwidgets\wx28zipstream\src\zip\iowin32.h
+1266220712 c:\_dev\wxwidgets\wx28zipstream\src\zip\iowin32.h
 	<windows.h>
 
 1061833232 source:c:\_dev\wxwidgets\wx28zipstream\src\zip\miniunz.c
@@ -3508,7 +3515,7 @@
 	"zip.h"
 	"iowin32.h"
 
-1061833232 source:c:\_dev\wxwidgets\wx28zipstream\src\zip\unzip.c
+1442784432 source:c:\_dev\wxwidgets\wx28zipstream\src\zip\unzip.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -3520,9 +3527,9 @@
 	<errno.h>
 	"crypt.h"
 
-1061441580 c:\_dev\wxwidgets\wx28zipstream\src\zip\crypt.h
+1361676750 c:\_dev\wxwidgets\wx28zipstream\src\zip\crypt.h
 
-1061833232 source:c:\_dev\wxwidgets\wx28zipstream\src\zip\zip.c
+1361676750 source:c:\_dev\wxwidgets\wx28zipstream\src\zip\zip.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

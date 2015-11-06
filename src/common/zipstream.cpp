@@ -223,10 +223,11 @@ void fill_wx_filefunc (zlib_filefunc_def* pzlib_filefunc_def)
 // wxZipInputStream
 // ----------------------------------------------------------------------------
 
-wxZipInputStream::wxZipInputStream(wxInputStream& Stream) : wxFilterInputStream(Stream)
+wxZipInputStream::wxZipInputStream(wxInputStream& Stream, const char* passwd) : wxFilterInputStream(Stream)
 {
 	pFileFuncs = new zlib_filefunc_def;
 	fill_wx_filefunc((zlib_filefunc_def*)pFileFuncs);
+	m_password = passwd;
 
 	hZip = unzOpen2((const char*) this, (zlib_filefunc_def*) pFileFuncs/*&wxZipModule::funcs*/);
 
@@ -242,7 +243,7 @@ wxZipInputStream::wxZipInputStream(wxInputStream& Stream) : wxFilterInputStream(
 		m_lasterror = wxSTREAM_EOF;
 	}
 
-	if (unzOpenCurrentFile(hZip) != UNZ_OK)
+	if (unzOpenCurrentFilePassword(hZip, m_password) != UNZ_OK)
 	{
 		wxLogSysError(_("Could not open initial file"));
 		m_lasterror = wxSTREAM_EOF;
@@ -282,7 +283,7 @@ bool wxZipInputStream::OpenNextFile()
 		return false;
 	}
 
-	if (unzOpenCurrentFile(hZip) != UNZ_OK)
+	if (unzOpenCurrentFilePassword(hZip, m_password) != UNZ_OK)
 	{
 		m_lasterror = wxSTREAM_READ_ERROR;
 		return false;
@@ -299,7 +300,7 @@ bool wxZipInputStream::OpenFile(const char* szFileName)
 	if (unzLocateFile(hZip, szFileName, 0) != UNZ_OK)
 		return false;
 
-	if (unzOpenCurrentFile(hZip) != UNZ_OK)
+	if (unzOpenCurrentFilePassword(hZip, m_password) != UNZ_OK)
 	{
 		m_lasterror = wxSTREAM_READ_ERROR;
 		return false;

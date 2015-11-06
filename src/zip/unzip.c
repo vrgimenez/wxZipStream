@@ -68,9 +68,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#ifndef NOUNCRYPT
+/*#ifndef NOUNCRYPT
         #define NOUNCRYPT
-#endif
+#endif*/
 
 #include "zlib.h"
 #include "unzip.h"

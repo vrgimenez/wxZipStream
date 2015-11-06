@@ -34,7 +34,7 @@ struct wxZipFileInfo
 class wxZipInputStream : public wxFilterInputStream
 {
 public:
-	wxZipInputStream(wxInputStream& stream);
+	wxZipInputStream(wxInputStream& stream, const char* passwd = NULL);
 	virtual ~wxZipInputStream();
 
 	bool OpenFile(const char* szFileName);
@@ -51,6 +51,7 @@ protected:
 
 	void* hZip;
 	void* pFileFuncs;
+	const char* m_password;
 };
 class wxZipOutputStream : public wxFilterOutputStream
 {
@@ -68,7 +69,7 @@ public:
 	void* GetHandleO() {return hZip;}
 protected:
 	virtual size_t OnSysWrite(const void *buffer, size_t bufsize);
-	
+
 	void* hZip;
 	void* pFileFuncs;
 };

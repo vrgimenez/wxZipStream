@@ -27,7 +27,7 @@
 				<Linker>
 					<Add option="-s" />
 					<Add library="libwxmsw28u.a" />
-					<Add library="libwxzlib.a" />
+					<Add library="C:/zlib/libz.dll.a" />
 					<Add directory="$(#wx)/lib/gcc_dll" />
 				</Linker>
 			</Target>
@@ -49,16 +49,13 @@
 		<Linker>
 			<Add option="-mthreads" />
 		</Linker>
-		<Unit filename="include/wx/zipstream.h" />
+		<Unit filename="../../../wx/2.8.12/include/wx/zipstream.h" />
 		<Unit filename="src/common/zipstream.cpp" />
 		<Unit filename="src/zip/crypt.h" />
 		<Unit filename="src/zip/deflate.h" />
-		<Unit filename="src/zip/infblock.h" />
-		<Unit filename="src/zip/infcodes.h" />
 		<Unit filename="src/zip/inffast.h" />
 		<Unit filename="src/zip/inffixed.h" />
 		<Unit filename="src/zip/inftrees.h" />
-		<Unit filename="src/zip/infutil.h" />
 		<Unit filename="src/zip/ioapi.c">
 			<Option compilerVar="CC" />
 		</Unit>
