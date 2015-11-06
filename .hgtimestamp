@@ -22,7 +22,7 @@
 "Makefile.in": {"timestamp": 1096522502.0},
 "README.txt": {"timestamp": 1096529538.0},
 "samples/zipcopy/zipcopy.cpp": {"timestamp": 1096529218.0},
-"src/common/zipstream.cpp": {"timestamp": 1096529142.0},
+"src/common/zipstream.cpp": {"timestamp": 1441941534.0},
 "src/zip/ChangeLogUnzip": {"timestamp": 1053346920.0},
 "src/zip/crypt.h": {"timestamp": 1061441580.0},
 "src/zip/deflate.h": {"timestamp": 1019711208.0},
@@ -48,6 +48,9 @@
 "src/zip/zip.h": {"timestamp": 1062781142.0},
 "src/zip/zlib.h": {"timestamp": 1019711208.0},
 "src/zip/zutil.h": {"timestamp": 940777790.0},
+"wx28ZipStream.cbp": {"timestamp": 1442057774.0},
+"wx28ZipStream.depend": {"timestamp": 1441941824.0},
+"wx28ZipStream.layout": {"timestamp": 1442057774.0},
 "TimestampMod_LastRecord": {"timestamp": 0}
 }
 }

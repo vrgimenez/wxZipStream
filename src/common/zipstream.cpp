@@ -82,7 +82,7 @@ voidpf ZCALLBACK fopen_wx_func OF((
    voidpf WXUNUSED(opaque),
    const char* filename,
    int mode))
-{	
+{
 	wxIOAPI* io = new wxIOAPI;
 	io->mode = mode;
 	io->pStream = ((wxStreamBase*) wxConstCast(filename, char));
@@ -182,7 +182,7 @@ int ZCALLBACK ferror_wx_func OF((
 {
 	wxIOAPI* io = (wxIOAPI*) stream;
 
-	char *szMode, *szOK;
+	const char *szMode, *szOK;
 	size_t nTell;
 	if((io->mode & ZLIB_FILEFUNC_MODE_READ) &&
 	   !(io->mode & ZLIB_FILEFUNC_MODE_WRITE))
@@ -201,7 +201,7 @@ int ZCALLBACK ferror_wx_func OF((
 	else
 		szOK = "No";
 
-	wxLogSysError("Misc error in zipstream...\nzipstream type:%s\naddress:%x\nisok?:%s\ntell:%i",
+	wxLogSysError(_("Misc error in zipstream...\nzipstream type:%s\naddress:%x\nisok?:%s\ntell:%i"),
 					szMode, io->pStream, szOK, nTell);
 
 	return 0;
@@ -232,19 +232,19 @@ wxZipInputStream::wxZipInputStream(wxInputStream& Stream) : wxFilterInputStream(
 
 	if (hZip == NULL)
 	{
-		wxLogSysError("Could not open zip file");
+		wxLogSysError(_("Could not open zip file"));
 		m_lasterror = wxSTREAM_EOF;
 	}
 
 	if (unzGoToFirstFile(hZip) != UNZ_OK)
 	{
-		wxLogSysError("Could not seek to initial position");
+		wxLogSysError(_("Could not seek to initial position"));
 		m_lasterror = wxSTREAM_EOF;
 	}
 
 	if (unzOpenCurrentFile(hZip) != UNZ_OK)
 	{
-		wxLogSysError("Could not open initial file");
+		wxLogSysError(_("Could not open initial file"));
 		m_lasterror = wxSTREAM_EOF;
 	}
 }
@@ -312,7 +312,7 @@ bool wxZipInputStream::GetFileInfo(wxZipFileInfo& Info)
 {
 	unz_file_info info;
 
-    if (unzGetCurrentFileInfo(hZip, &info, NULL, 0, 
+    if (unzGetCurrentFileInfo(hZip, &info, NULL, 0,
                                 NULL, 0, NULL, 0) != UNZ_OK)
     {
         return false;
@@ -326,15 +326,15 @@ bool wxZipInputStream::GetFileInfo(wxZipFileInfo& Info)
     wxCharBuffer commentbuffer(info.size_file_comment+1);
 
 	unzGetCurrentFileInfo(hZip, NULL, namebuffer.data(), info.size_filename,
-								NULL, 0, 
+								NULL, 0,
 								commentbuffer.data(), info.size_file_comment);
 
 	//arg, doesn't add null character :)
     namebuffer.data()[info.size_filename] = '\0';
     commentbuffer.data()[info.size_file_comment] = '\0';
 
-	Info.szName = namebuffer;
-	Info.szComment = commentbuffer;
+	Info.szName =  wxString::FromUTF8(namebuffer);
+	Info.szComment =  wxString::FromUTF8(commentbuffer);
 
     return true;
 }
@@ -342,7 +342,7 @@ bool wxZipInputStream::GetFileInfo(wxZipFileInfo& Info)
 size_t wxZipInputStream::OnSysRead(void* buffer, size_t bufsize)
 {
 	int nRead = unzReadCurrentFile(hZip, buffer, bufsize);
-    return nRead <= 0 ? 0 : nRead;	
+    return nRead <= 0 ? 0 : nRead;
 }
 
 // ----------------------------------------------------------------------------
@@ -359,7 +359,7 @@ wxZipOutputStream::wxZipOutputStream(wxOutputStream& Stream) : wxFilterOutputStr
 
 	if (hZip == NULL)
 	{
-		wxLogSysError("Could not write zip file");
+		wxLogSysError(_("Could not write zip file"));
 		m_lasterror = wxSTREAM_EOF;
 	}
 }
@@ -400,30 +400,30 @@ bool wxZipOutputStream::MakeFile(wxZipFileInfo& Info, wxInt32 level)
 	info.internal_fa=0;
 	info.tmz_date = t;
 	info.dosDate = Info.dwTime; //0 == current time
-	if (zipOpenNewFileInZip(hZip, Info.szName, 
-		&info,			
+	if (zipOpenNewFileInZip(hZip, Info.szName.mb_str(),
+		&info,
 		NULL,0,NULL,0  //some etc. stuff
-		, Info.szComment.c_str()		//comment
+		, Info.szComment.mb_str()		//comment
 		, Z_DEFLATED		//compression method -> Zip
 		, level) != ZIP_OK)
 	{
 		return false;
 	}
-	
+
 	return true;
 }
 
 size_t wxZipOutputStream::OnSysWrite(const void* buffer, size_t bufsize)
 {
 	int nResult = zipWriteInFileInZip(hZip, (void*) buffer, bufsize);
-    return nResult == ZIP_OK ? bufsize : 0;	
+    return nResult == ZIP_OK ? bufsize : 0;
 }
 
 // ----------------------------------------------------------------------------
 // wxZipStream
 // ----------------------------------------------------------------------------
 
-wxZipStream::wxZipStream(wxInputStream& i, wxOutputStream& o) : 
+wxZipStream::wxZipStream(wxInputStream& i, wxOutputStream& o) :
 	wxZipInputStream(i), wxZipOutputStream(o) {}
 
 wxZipStream::~wxZipStream(){}
