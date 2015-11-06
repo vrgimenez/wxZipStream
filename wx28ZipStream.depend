@@ -3435,25 +3435,23 @@
 	<unistd.h>
 	<unixio.h>
 
-1326754290 c:\_dev\wxwidgets\wx28zipstream\src\zip\ioapi.h
+1434557490 c:\_dev\wxwidgets\wx28zipstream\src\zip\ioapi.h
 	<stdio.h>
 	<stdlib.h>
 	"zlib.h"
-	<stdint.h>
-	"mz64conf.h"
 	"stdint.h"
 
-1266220702 c:\_dev\wxwidgets\wx28zipstream\src\zip\zip.h
+1434557490 c:\_dev\wxwidgets\wx28zipstream\src\zip\zip.h
 	"zlib.h"
 	"ioapi.h"
 	"bzlib.h"
 
-1341776048 c:\_dev\wxwidgets\wx28zipstream\src\zip\unzip.h
+1434557490 c:\_dev\wxwidgets\wx28zipstream\src\zip\unzip.h
 	"zlib.h"
 	"ioapi.h"
 	"bzlib.h"
 
-1443657205 source:c:\_dev\wxwidgets\wx28zipstream\src\common\zipstream.cpp
+1443657204 source:c:\_dev\wxwidgets\wx28zipstream\src\common\zipstream.cpp
 	"wx/wxprec.h"
 	"wx/zipstream.h"
 	"wx/utils.h"
@@ -3466,23 +3464,27 @@
 	"zip/unzip.h"
 	"wx/module.h"
 
-1327161524 source:c:\_dev\wxwidgets\wx28zipstream\src\zip\ioapi.c
+1434557490 source:c:\_dev\wxwidgets\wx28zipstream\src\zip\ioapi.c
+	<stdlib.h>
+	<string.h>
 	"ioapi.h"
 
-1062736776 source:c:\_dev\wxwidgets\wx28zipstream\src\zip\ioapi_mem.c
+1434557490 source:c:\_dev\wxwidgets\wx28zipstream\src\zip\ioapi_mem.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"zlib.h"
 	"ioapi.h"
+	"ioapi_mem.h"
 
-1442788269 source:c:\_dev\wxwidgets\wx28zipstream\src\zip\iowin32.c
+1434557490 source:c:\_dev\wxwidgets\wx28zipstream\src\zip\iowin32.c
 	<stdlib.h>
+	<tchar.h>
 	"zlib.h"
 	"ioapi.h"
 	"iowin32.h"
 
-1266220712 c:\_dev\wxwidgets\wx28zipstream\src\zip\iowin32.h
+1434557490 c:\_dev\wxwidgets\wx28zipstream\src\zip\iowin32.h
 	<windows.h>
 
 1061833232 source:c:\_dev\wxwidgets\wx28zipstream\src\zip\miniunz.c
@@ -3515,7 +3517,7 @@
 	"zip.h"
 	"iowin32.h"
 
-1442784432 source:c:\_dev\wxwidgets\wx28zipstream\src\zip\unzip.c
+1444795749 source:c:\_dev\wxwidgets\wx28zipstream\src\zip\unzip.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -3525,11 +3527,13 @@
 	<string.h>
 	<stdlib.h>
 	<errno.h>
+	"aes/aes.h"
+	"aes/fileenc.h"
 	"crypt.h"
 
-1361676750 c:\_dev\wxwidgets\wx28zipstream\src\zip\crypt.h
+1434557490 c:\_dev\wxwidgets\wx28zipstream\src\zip\crypt.h
 
-1361676750 source:c:\_dev\wxwidgets\wx28zipstream\src\zip\zip.c
+1434557490 source:c:\_dev\wxwidgets\wx28zipstream\src\zip\zip.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -3540,5 +3544,46 @@
 	<string.h>
 	<stdlib.h>
 	<errno.h>
+	"aes/aes.h"
+	"aes/fileenc.h"
+	"aes/prng.h"
+	"aes/entropy.h"
 	"crypt.h"
+
+1434557490 c:\_dev\wxwidgets\wx28zipstream\src\zip\ioapi_mem.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"zlib.h"
+	"ioapi.h"
+
+1434557490 c:\_dev\wxwidgets\wx28zipstream\src\zip\aes\aes.h
+	<stdlib.h>
+	"brg_types.h"
+
+1434557490 c:\_dev\wxwidgets\wx28zipstream\src\zip\aes\brg_types.h
+	<limits.h>
+	<stddef.h>
+	<stdint.h>
+
+1434557490 c:\_dev\wxwidgets\wx28zipstream\src\zip\aes\fileenc.h
+	"aes.h"
+	"hmac.h"
+	"pwd2key.h"
+
+1434557490 c:\_dev\wxwidgets\wx28zipstream\src\zip\aes\hmac.h
+	<memory.h>
+	"sha1.h"
+	"sha2.h"
+
+1434557490 c:\_dev\wxwidgets\wx28zipstream\src\zip\aes\sha1.h
+	<stdlib.h>
+	"brg_types.h"
+
+1434557490 c:\_dev\wxwidgets\wx28zipstream\src\zip\aes\pwd2key.h
+
+1434557490 c:\_dev\wxwidgets\wx28zipstream\src\zip\aes\prng.h
+	"sha1.h"
+
+1434557490 c:\_dev\wxwidgets\wx28zipstream\src\zip\aes\entropy.h
 

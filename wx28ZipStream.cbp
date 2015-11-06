@@ -16,6 +16,7 @@
 				<Option projectLinkerOptionsRelation="2" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add option="-DHAVE_AES" />
 					<Add directory="$(#wx)/lib/gcc_dll/mswu" />
 					<Add directory="include" />
 					<Add directory="src/zip" />
@@ -28,7 +29,9 @@
 					<Add option="-s" />
 					<Add library="libwxmsw28u.a" />
 					<Add library="C:/zlib/libz.dll.a" />
+					<Add library="libaes.a" />
 					<Add directory="$(#wx)/lib/gcc_dll" />
+					<Add directory="src/zip" />
 				</Linker>
 			</Target>
 		</Build>
