@@ -182,24 +182,24 @@ int ZCALLBACK ferror_wx_func OF((
 {
 	wxIOAPI* io = (wxIOAPI*) stream;
 
-	const char *szMode, *szOK;
+	const wxChar *szMode, *szOK;
 	size_t nTell;
 	if((io->mode & ZLIB_FILEFUNC_MODE_READ) &&
 	   !(io->mode & ZLIB_FILEFUNC_MODE_WRITE))
 	{
-		szMode = "Input";
+		szMode = _("Input");
 		nTell = ((wxZipInputStream*)io->pStream)->TellRawI();
 	}
 	else
 	{
-		szMode = "Output";
+		szMode = _("Output");
 		nTell = ((wxZipOutputStream*)io->pStream)->TellRawO();
 	}
 
 	if(io->pStream->IsOk())
-		szOK = "Yes";
+		szOK = _("Yes");
 	else
-		szOK = "No";
+		szOK = _("No");
 
 	wxLogSysError(_("Misc error in zipstream...\nzipstream type:%s\naddress:%x\nisok?:%s\ntell:%i"),
 					szMode, io->pStream, szOK, nTell);
