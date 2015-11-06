@@ -1,10 +1,38 @@
+/* crypt.h -- base code for crypt/uncrypt ZIPfile
+
+
+   Version 1.01e, February 12th, 2005
+
+   Copyright (C) 1998-2005 Gilles Vollant
+
+   This code is a modified version of crypting code in Infozip distribution
+
+   The encryption/decryption parts of this source code (as opposed to the
+   non-echoing password parts) were originally written in Europe.  The
+   whole source package can be freely distributed, including from the USA.
+   (Prior to January 2000, re-export from the US was a violation of US law.)
+
+   This encryption code is a direct transcription of the algorithm from
+   Roger Schlafly, described by Phil Katz in the file appnote.txt.  This
+   file (appnote.txt) is distributed with the PKZIP program (even in the
+   version without encryption capabilities).
+
+   If you don't need crypting in your application, just define symbols
+   NOCRYPT and NOUNCRYPT.
+
+   This code support the "Traditional PKWARE Encryption".
+
+   The new AES encryption added on Zip format by Winzip (see the page
+   http://www.winzip.com/aes_info.htm ) and PKWare PKZip 5.x Strong
+   Encryption is not supported.
+*/
 
 #define CRC32(c, b) ((*(pcrc_32_tab+(((int)(c) ^ (b)) & 0xff))) ^ ((c) >> 8))
 
 /***********************************************************************
  * Return the next byte in the pseudo-random sequence
  */
-static int decrypt_byte(unsigned long* pkeys, const unsigned long* pcrc_32_tab)
+static int decrypt_byte(unsigned long* pkeys, const z_crc_t* pcrc_32_tab)
 {
     unsigned temp;  /* POTENTIAL BUG:  temp*(temp^1) may overflow in an
                      * unpredictable manner on 16-bit systems; not a problem
@@ -17,7 +45,7 @@ static int decrypt_byte(unsigned long* pkeys, const unsigned long* pcrc_32_tab)
 /***********************************************************************
  * Update the encryption keys with the next byte of plain text
  */
-static int update_keys(unsigned long* pkeys,const unsigned long* pcrc_32_tab,int c)
+static int update_keys(unsigned long* pkeys,const z_crc_t* pcrc_32_tab,int c)
 {
     (*(pkeys+0)) = CRC32((*(pkeys+0)), c);
     (*(pkeys+1)) += (*(pkeys+0)) & 0xff;
@@ -34,7 +62,7 @@ static int update_keys(unsigned long* pkeys,const unsigned long* pcrc_32_tab,int
  * Initialize the encryption keys and the random header according to
  * the given password.
  */
-static void init_keys(const char* passwd,unsigned long* pkeys,const unsigned long* pcrc_32_tab)
+static void init_keys(const char* passwd,unsigned long* pkeys,const z_crc_t* pcrc_32_tab)
 {
     *(pkeys+0) = 305419896L;
     *(pkeys+1) = 591751049L;
@@ -59,13 +87,12 @@ static void init_keys(const char* passwd,unsigned long* pkeys,const unsigned lon
 #    define ZCR_SEED2 3141592654UL     /* use PI as default pattern */
 #  endif
 
-static int crypthead(passwd, buf, bufSize, pkeys, pcrc_32_tab, crcForCrypting)
-    const char *passwd;         /* password string */
-    unsigned char *buf;         /* where to write header */
-    int bufSize;
-    unsigned long* pkeys;
-    const unsigned long* pcrc_32_tab;
-    unsigned long crcForCrypting;
+static int crypthead(const char* passwd,      /* password string */
+                     unsigned char* buf,      /* where to write header */
+                     int bufSize,
+                     unsigned long* pkeys,
+                     const z_crc_t* pcrc_32_tab,
+                     unsigned long crcForCrypting)
 {
     int n;                       /* index in random header */
     int t;                       /* temporary */
@@ -96,8 +123,8 @@ static int crypthead(passwd, buf, bufSize, pkeys, pcrc_32_tab, crcForCrypting)
     {
         buf[n] = (unsigned char)zencode(pkeys, pcrc_32_tab, header[n], t);
     }
-    buf[n++] = zencode(pkeys, pcrc_32_tab, (int)(crcForCrypting >> 16) & 0xff, t);
-    buf[n++] = zencode(pkeys, pcrc_32_tab, (int)(crcForCrypting >> 24) & 0xff, t);
+    buf[n++] = (unsigned char)zencode(pkeys, pcrc_32_tab, (int)(crcForCrypting >> 16) & 0xff, t);
+    buf[n++] = (unsigned char)zencode(pkeys, pcrc_32_tab, (int)(crcForCrypting >> 24) & 0xff, t);
     return n;
 }
 
