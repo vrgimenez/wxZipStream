@@ -60,7 +60,7 @@ public:
 	virtual ~wxZipOutputStream();
 
 	//named it CreateFile, but then got link error in MSVC???
-	bool MakeFile(wxZipFileInfo& Info, wxInt32 level = -1);
+	bool MakeFile(wxZipFileInfo& Info, wxInt32 level = -1, unsigned long crcFile = 0);
 
 	wxOutputStream& WriteRaw(void* pBuffer, size_t size);
 	off_t TellRawO();

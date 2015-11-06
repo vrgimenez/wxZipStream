@@ -121,7 +121,7 @@ long ZCALLBACK ftell_wx_func OF((
    voidpf stream))
 {
 	wxIOAPI* io = (wxIOAPI*) stream;
-	if((io->mode & ZLIB_FILEFUNC_MODE_READ) &&
+	if( (io->mode & ZLIB_FILEFUNC_MODE_READ) &&
 	   !(io->mode & ZLIB_FILEFUNC_MODE_WRITE))
 		return ((wxZipInputStream*) io->pStream)->TellRawI();
 	else
@@ -148,10 +148,11 @@ long ZCALLBACK fseek_wx_func OF((
     case ZLIB_FILEFUNC_SEEK_SET :
 		origin = wxFromStart;
         break;
-    default: return -1;
+    default:
+    	return -1;
     }
 
-	if((io->mode & ZLIB_FILEFUNC_MODE_READ) &&
+	if( (io->mode & ZLIB_FILEFUNC_MODE_READ) &&
 	   !(io->mode & ZLIB_FILEFUNC_MODE_WRITE))
 	{
 		((wxZipInputStream*) io->pStream)->SeekRawI(offset, (wxSeekMode) origin);
@@ -180,11 +181,12 @@ int ZCALLBACK ferror_wx_func OF((
    voidpf WXUNUSED(opaque),
    voidpf stream))
 {
+	/*
 	wxIOAPI* io = (wxIOAPI*) stream;
 
 	const wxChar *szMode, *szOK;
 	size_t nTell;
-	if((io->mode & ZLIB_FILEFUNC_MODE_READ) &&
+	if( (io->mode & ZLIB_FILEFUNC_MODE_READ) &&
 	   !(io->mode & ZLIB_FILEFUNC_MODE_WRITE))
 	{
 		szMode = _("Input");
@@ -203,7 +205,7 @@ int ZCALLBACK ferror_wx_func OF((
 
 	wxLogSysError(_("Misc error in zipstream...\nzipstream type:%s\naddress:%x\nisok?:%s\ntell:%i"),
 					szMode, io->pStream, szOK, nTell);
-
+	*/
 	return 0;
 }
 
@@ -388,7 +390,7 @@ off_t wxZipOutputStream::SeekRawO(off_t pos, wxSeekMode sm)
 	return m_parent_o_stream->SeekO(pos, sm);
 }
 
-bool wxZipOutputStream::MakeFile(wxZipFileInfo& Info, wxInt32 level)
+bool wxZipOutputStream::MakeFile(wxZipFileInfo& Info, wxInt32 level, unsigned long crcFile)
 {
 	zipCloseFileInZip(hZip);
 
@@ -414,7 +416,7 @@ bool wxZipOutputStream::MakeFile(wxZipFileInfo& Info, wxInt32 level)
 		DEF_MEM_LEVEL,
 		Z_DEFAULT_STRATEGY,
 		m_password,					//password
-		0) != ZIP_OK )				//crc32
+		crcFile) != ZIP_OK )		//crc32
 	{
 		return false;
 	}
