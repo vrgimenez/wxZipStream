@@ -1,0 +1,33 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: zipcopy - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "D:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSPB2.tmp" with contents
+[
+/nologo /MDd /W4 /Gm /GR /GX /Zi /Od /I "..\..\include" /I "..\..\src\zip" /I "..\..\src" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /Fo"Debug\zipcopy/" /Fd"..\..\bin\zipcopy.pdb" /FD /GZ /c 
+"D:\Documents and Settings\Administrator\Desktop\zip\samples\zipcopy\zipcopy.cpp"
+]
+Creating command line "cl.exe @D:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSPB2.tmp" 
+Creating temporary file "D:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSPB3.tmp" with contents
+[
+wxmsw25d_core.lib wxbase25d.lib wxzlibd.lib kernel32.lib user32.lib gdi32.lib comdlg32.lib winspool.lib winmm.lib shell32.lib comctl32.lib odbc32.lib ole32.lib oleaut32.lib uuid.lib rpcrt4.lib advapi32.lib wsock32.lib oleacc.lib /nologo /subsystem:windows /incremental:yes /pdb:"..\..\bin/zipcopy.pdb" /debug /machine:I386 /out:"..\..\bin\zipcopy.exe" 
+".\Debug\zipcopy\zipcopy.obj"
+"\Documents and Settings\Administrator\Desktop\zip\lib\wxzipstream.lib"
+]
+Creating command line "link.exe @D:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSPB3.tmp"
+<h3>Output Window</h3>
+Compiling...
+zipcopy.cpp
+Linking...
+
+
+
+<h3>Results</h3>
+zipcopy.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

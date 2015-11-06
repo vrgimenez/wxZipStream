@@ -1,0 +1,210 @@
+<?xml version="1.0" ?>
+<!-- $Id: zipstream.bkl,v 1.3 2004/05/31 01:37:36 ryannpcs Exp $ -->
+<makefile>
+	<option name="SHARED">
+		<values>0,1</values>
+		<values-description>,DLL</values-description>
+		<default-value>0</default-value>
+		<description>
+			What type of library to build?
+		</description>
+	</option>
+	<set var="ISDLL" cond="SHARED=='1'">1</set>
+	<set var="ISDLL" cond="SHARED=='0'">0</set>
+
+	<option name="UNICODE">
+		<values>0,1</values>
+		<values-description>,Unicode</values-description>
+		<default-value>0</default-value>        
+		<description>
+			Compile Unicode build of wxWindows?
+		</description>
+	</option>
+    <set var="UNICODE_DEFINE">
+        <if cond="FORMAT!='autoconf' and UNICODE=='1'">_UNICODE</if>
+    </set>
+
+
+    <option name="BUILD">
+        <values>debug,release</values>
+        <values-description>Debug,Release</values-description>
+        <default-value>debug</default-value>
+        <description>
+            Type of compiled binaries
+        </description>
+    </option>
+
+	<if cond="FORMAT=='msvc'">
+        <option name="DEBUG_RUNTIME_LIBS">
+            <values>0,1,default</values>
+            <default-value>default</default-value>
+            <description>
+Should link against debug RTL (msvcrtd.dll) or release (msvcrt.dll)?
+Acts according to DEBUG_INFO by default.
+            </description>
+        </option>
+    </if>
+    <if cond="FORMAT!='msvc'">
+        <set var="DEBUG_RUNTIME_LIBS">default</set>
+    </if>
+
+	<!--															-->
+	<!--						Variables							-->
+	<!--															-->
+	<set var="DEBUGINFO">
+        <if cond="BUILD=='debug'">on</if>
+        <if cond="BUILD=='release'">off</if>
+    </set>
+    <set var="DEBUGRUNTIME">
+        <if cond="BUILD=='debug'">on</if>
+        <if cond="BUILD=='release'">off</if>
+    </set>
+    <set var="OPTIMIZEFLAG">
+        <if cond="BUILD=='debug'">off</if>
+        <if cond="BUILD=='release'">speed</if>
+    </set>
+	<set var="ISDEBUG" cond="BUILD=='debug'">1</set>
+	<set var="ISDEBUG" cond="BUILD=='release'">0</set>
+	<set var="ISUNICODE" cond="UNICODE=='1'">1</set>
+	<set var="ISUNICODE" cond="UNICODE=='0'">0</set>
+	
+	<!-- WXLIBS -->
+	<set var="WXLIBPOSTFIX">
+		<if cond="BUILD=='debug' and UNICODE=='1'">ud</if>
+		<if cond="BUILD=='debug' and UNICODE=='0'">d</if>
+		<if cond="BUILD=='release' and UNICODE=='1'">u</if>
+	</set>
+	<set var="WXSUBLIBPOSTFIX">
+		<if cond="BUILD=='debug'">d</if>
+	</set>
+
+	<!--															-->
+	<!--						Base Template						-->
+	<!--															-->
+    <!-- for both GUI and wxBase libs/samples: -->
+    <template id="wxbase">
+        <!-- link against builtin 3rd party libs, if needed: 
+        <sys-lib>$(LIB_TIFF)</sys-lib>
+        <sys-lib>$(LIB_JPEG)</sys-lib>
+        <sys-lib>$(LIB_PNG)</sys-lib>
+        <sys-lib>$(LIB_ZLIB)</sys-lib>
+        <sys-lib>$(LIB_ODBC)</sys-lib>
+        <sys-lib>$(LIB_REGEX)</sys-lib>
+        <sys-lib>$(LIB_EXPAT)</sys-lib>
+        
+        <ldlibs>$(EXTRALIBS)</ldlibs>
+		-->
+		
+        <!-- system libraries on windows: -->
+        <if cond="FORMAT!='autoconf' and FORMAT!='gcc'">
+		<sys-lib>wxmsw25$(WXLIBPOSTFIX)_core</sys-lib>
+		<sys-lib>wxbase25$(WXLIBPOSTFIX)</sys-lib> 
+
+		<sys-lib>wxzlib$(WXSUBLIBPOSTFIX)</sys-lib> 
+         <!--   <sys-lib>$(UNICOWS_LIB)</sys-lib> -->
+            <if cond="FORMAT=='borland'">
+                <sys-lib>ole2w32</sys-lib>
+            </if>
+            <if cond="FORMAT!='borland'">
+                <sys-lib>kernel32</sys-lib>
+                <sys-lib>user32</sys-lib>
+                <sys-lib>gdi32</sys-lib>
+                <sys-lib>comdlg32</sys-lib>
+                <sys-lib>winspool</sys-lib>
+                <sys-lib>winmm</sys-lib>
+                <sys-lib>shell32</sys-lib>
+                <sys-lib>comctl32</sys-lib>
+                <sys-lib>odbc32</sys-lib>
+                <sys-lib>ole32</sys-lib>
+                <sys-lib>oleaut32</sys-lib>
+                <sys-lib>uuid</sys-lib>
+                <sys-lib>rpcrt4</sys-lib>
+                <sys-lib>advapi32</sys-lib>
+                <sys-lib>wsock32</sys-lib>
+            </if>
+            <if cond="FORMAT=='msvc' or FORMAT=='msvc6prj' or FORMAT=='borland'">
+                <sys-lib>oleacc</sys-lib>
+            </if>
+        </if>
+		<if cond="FORMAT=='autoconf' or FORMAT=='gcc'">
+			<ldflags>`wx-config --libs`</ldflags>
+			<cxxflags>`wx-config --cxxflags`</cxxflags>
+		</if>
+    </template>
+
+	<template id="wxzip_base" template="wxbase">
+		<include>../../include</include>
+		<include>../../src/zip</include>
+		<include>../../src</include>
+		<warnings>max</warnings>
+		<define>$(UNICODE_DEFINE)</define>
+		<optimize>$(OPTIMIZEFLAG)</optimize>
+		<debug-info>$(DEBUGINFO)</debug-info>
+		<debug-runtime-libs>$(DEBUGRUNTIME)</debug-runtime-libs>
+        <dirname>../../lib</dirname>
+	</template>
+	
+	<define-tag name="headers" rules="dll,lib,exe">
+		<if cond="FORMAT=='msvc6prj'">
+			<msvc-project-files>
+				$(value)
+			</msvc-project-files>
+		</if>
+	</define-tag>
+
+	<!-- Library/Dll template -->
+    <template id="wxzipbase" template="wxzip_base">
+        <if cond="FORMAT=='msvc6prj'">
+            <msvc-file-group>Sources:../../src/common/*</msvc-file-group>
+			<msvc-file-group>ZIP Sources:../../src/zip/*.c</msvc-file-group>
+			<msvc-file-group>ZIP Headers:../../src/zip/*.h</msvc-file-group>
+            <msvc-file-group>Headers:../../include/wx/*.h</msvc-file-group>
+        </if>
+        <sources>
+			../../src/zip/ioapi.c
+			../../src/zip/unzip.c
+			../../src/zip/zip.c
+			../../src/common/zipstream.cpp
+        </sources>
+		<headers>
+			../../src/zip/ioapi.h
+			../../src/zip/unzip.h
+			../../src/zip/zip.h
+			../../include/wx/zipstream.h
+		</headers>
+    </template>
+
+	<dll id="dllwxzip" template="wxzipbase" cond="SHARED=='1'">
+		<dllname>wxzipstream</dllname>
+		<libname>wxzipstreamstub</libname>
+	</dll>
+	<lib id="libwxzip" template="wxzipbase" cond="SHARED=='0'">
+		<libname>wxzipstream</libname>
+	</lib>
+	<!--UGLY HACK!-->
+	<set var="MSVC6PRJ_MERGED_TARGETS" append="1">wxzip=libwxzip+dllwxzip</set>
+
+	<template id="wxzip_exe" template="wxzip_base">
+        <dirname>./</dirname>
+        <if cond="FORMAT=='msvc6prj'">
+            <msvc-file-group>Sources:../../samples/*.cpp</msvc-file-group>
+            <msvc-file-group>Headers:../../samples/*.h</msvc-file-group>
+        </if>
+		<if cond="ISDLL=='1'">
+			<depends>dllwxzip</depends>
+		</if>
+		<if cond="ISDLL=='0'">
+			<depends>libwxzip</depends>
+		</if>
+    </template>
+	<template id="wxzip_guiexe" template="wxzip_exe">
+		<app-type>gui</app-type>
+	</template>
+
+	<exe id="zipcopy" template="wxzip_guiexe">
+		<dirname>../../bin</dirname>
+        <sources>
+			../../samples/zipcopy/zipcopy.cpp
+        </sources>
+	</exe>
+</makefile>
