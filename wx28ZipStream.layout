@@ -2,24 +2,14 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Release" />
-	<File name="..\..\..\wx\2.8.12\include\wx\zipstream.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\zip\unzip.c" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1703" topLine="56" />
+			<Cursor1 position="47919" topLine="1267" />
 		</Cursor>
 	</File>
-	<File name="src\zip\ioapi.c" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\common\zipstream.cpp" open="1" top="1" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="12248" topLine="351" />
-		</Cursor>
-	</File>
-	<File name="src\zip\zconf.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="11860" topLine="361" />
-		</Cursor>
-	</File>
-	<File name="src\zip\crypt.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="4448" topLine="82" />
+			<Cursor1 position="5397" topLine="200" />
 		</Cursor>
 	</File>
 	<File name="src\zip\zlib.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -27,24 +17,9 @@
 			<Cursor1 position="8138" topLine="236" />
 		</Cursor>
 	</File>
-	<File name="src\common\zipstream.cpp" open="1" top="1" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\zip\unzip.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="4652" topLine="203" />
-		</Cursor>
-	</File>
-	<File name="src\zip\zip.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1175" topLine="34" />
-		</Cursor>
-	</File>
-	<File name="src\zip\zip.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="src\zip\ioapi.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="5769" topLine="147" />
+			<Cursor1 position="7655" topLine="168" />
 		</Cursor>
 	</File>
 	<File name="src\zip\ioapi_mem.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -52,20 +27,44 @@
 			<Cursor1 position="4761" topLine="174" />
 		</Cursor>
 	</File>
+	<File name="src\zip\ioapi.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5769" topLine="147" />
+		</Cursor>
+	</File>
+	<File name="src\zip\zip.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1175" topLine="34" />
+		</Cursor>
+	</File>
 	<File name="src\zip\iowin32.c" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="18719" topLine="567" />
 		</Cursor>
 	</File>
-	<File name="src\zip\unzip.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\zip\zip.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="7655" topLine="168" />
+			<Cursor1 position="0" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src\zip\unzip.c" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\zip\zconf.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="47919" topLine="1267" />
+			<Cursor1 position="11860" topLine="361" />
 		</Cursor>
 	</File>
-	<EditorTabsLayout layout="0933b290563bef6d00002fe000000002=0;wxzipstream:src\zip\zip.c,1;wxzipstream:src\zip\zip.h,2;wxzipstream:src\zip\unzip.c,3;wxzipstream:src\zip\zconf.h,4;wxzipstream:src\zip\crypt.h,*5;wxzipstream:src\common\zipstream.cpp,6;wxzipstream:..\..\..\wx\2.8.12\include\wx\zipstream.h@layout2|name=dummy;caption=;state=2098174;dir=3;layer=0;row=0;pos=0;prop=100000;bestw=559;besth=188;minw=559;minh=188;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=0933b290563bef6d00002fe000000002;caption=;state=2098172;dir=5;layer=0;row=0;pos=0;prop=100000;bestw=200;besth=200;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|dock_size(5,0,0)=202|" />
+	<File name="..\..\..\wx\2.8.12\include\wx\zipstream.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1703" topLine="56" />
+		</Cursor>
+	</File>
+	<File name="src\zip\crypt.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4448" topLine="82" />
+		</Cursor>
+	</File>
+	<File name="src\zip\ioapi.c" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="12248" topLine="351" />
+		</Cursor>
+	</File>
 </CodeBlocks_layout_file>
