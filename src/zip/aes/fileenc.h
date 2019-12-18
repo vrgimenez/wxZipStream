@@ -31,7 +31,7 @@
  Issue Date: 24/01/2003
 
  This file contains the header file for fileenc.c, which implements password
- based file encryption and authentication using AES in CTR mode, HMAC-SHA1 
+ based file encryption and authentication using AES in CTR mode, HMAC-SHA1
  authentication and RFC2898 password based key derivation.
 */
 
@@ -95,7 +95,7 @@ typedef struct
 
 int fcrypt_init(
     int mode,                               /* the mode to be used (input)          */
-    const unsigned char pwd[],              /* the user specified password (input)  */
+    const char pwd[],                       /* the user specified password (input)  */
     unsigned int pwd_len,                   /* the length of the password (input)   */
     const unsigned char salt[],             /* the salt (input)                     */
 #ifdef PASSWORD_VERIFIER
