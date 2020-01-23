@@ -7,7 +7,7 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Release">
-				<Option output="bin/Release/wxzipstream31_gcc510TDM" imp_lib="$(TARGET_OUTPUT_DIR)wxzipstream31" def_file="$(TARGET_OUTPUT_DIR)wxzipstream31" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Release/wxzipstream125_wx313_gcc810" imp_lib="$(TARGET_OUTPUT_DIR)wxzipstream" def_file="$(TARGET_OUTPUT_DIR)wxzipstream" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="3" />
 				<Option compiler="gcc" />
@@ -18,20 +18,20 @@
 					<Add option="-O2" />
 					<Add option="-std=c++11" />
 					<Add option="-DHAVE_AES" />
-					<Add directory="$(#wx31)/lib/gcc510TDM_dll/mswu" />
+					<Add directory="$(#wx31)/lib/gcc810_dll/mswu" />
 					<Add directory="include" />
 					<Add directory="src/zip" />
 					<Add directory="src" />
 				</Compiler>
 				<ResourceCompiler>
-					<Add directory="$(#wx31)/lib/gcc510TDM_dll/mswu" />
+					<Add directory="$(#wx31)/lib/gcc810_dll/mswu" />
 				</ResourceCompiler>
 				<Linker>
 					<Add option="-s" />
 					<Add library="libwxbase31u.a" />
 					<Add library="C:/zlib/libz.dll.a" />
 					<Add library="libaes.a" />
-					<Add directory="$(#wx31)/lib/gcc510TDM_dll" />
+					<Add directory="$(#wx31)/lib/gcc810_dll" />
 					<Add directory="src/zip" />
 				</Linker>
 			</Target>
